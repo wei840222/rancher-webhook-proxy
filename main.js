@@ -12,7 +12,7 @@ app.use(async ctx => {
     console.log(ctx.header)
     console.log(ctx.request.body)
     await axios.post('https://notify-api.line.me/api/notify',
-        ctx.request.body,
+        `message=${ctx.request.body}`,
         {
             headers:
             {
