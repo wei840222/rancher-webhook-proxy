@@ -11,7 +11,7 @@ app.use(bodyParser())
 app.use(async ctx => {
     console.log(ctx.header)
     console.log(ctx.request.body)
-    ctx.request.body.forEach(element => {
+    ctx.request.body.forEach(async element => {
         await axios.post('https://notify-api.line.me/api/notify',
             `message=${element.labels.test_msg}`,
             {
