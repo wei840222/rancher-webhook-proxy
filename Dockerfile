@@ -3,5 +3,6 @@ FROM node:10
 WORKDIR /app
 COPY . /app
 RUN yarn
-
+ENV LINE_NOTIFY_ACCESS_TOKEN=value
+EXPOSE 3000
 ENTRYPOINT [ "yarn", "start" ]
