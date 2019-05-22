@@ -4,7 +4,6 @@ const bodyParser = require('koa-bodyparser')
 const axios = require('axios')
 
 const app = new Koa()
-const token = process.env['LINE_NOTIFY_ACCESS_TOKEN']
 
 app.use(logger())
 app.use(bodyParser())
