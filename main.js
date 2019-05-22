@@ -10,18 +10,22 @@ app.use(logger())
 app.use(bodyParser())
 app.use(async ctx => {
     console.log(ctx.header)
+    console.log(ctx.request.query)
     console.log(ctx.request.body)
-    ctx.request.body.forEach(async element => {
-        await axios.post('https://notify-api.line.me/api/notify',
-            `message=${element.labels.test_msg}`,
-            {
-                headers:
+    console.log()
+    ctx.request.body.forEach(element => {
+        ctx.request.query['token'].split(',').forEach(async token => {
+            await axios.post('https://notify-api.line.me/api/notify',
+                `message=${element.labels.test_msg}`,
                 {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `Bearer ${token}`
+                    headers:
+                        {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': `Bearer ${token}`
+                        }
                 }
-            }
-        ).catch(err => console.log(err))
+            ).catch(err => console.log(err))
+        })
     })
     ctx.body = 'OK'
 })
